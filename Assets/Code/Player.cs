@@ -10,14 +10,21 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _bullet;
     [SerializeField] private Transform _barrel;
     [SerializeField] private float _force;
+    private Camera _camera;
+    private IRotation _rotation;
     private IMove _moveTransform;
 
     private void Start()
     {
+        _camera = Camera.main;
         _moveTransform = new AccelerationMove(transform, _speed, _acceleration);
+        _rotation = new RotationShip(transform);
     }
     private void Update()
     {
+        var direction = Input.mousePosition - _camera.WorldToScreenPoint(transform.position);
+        _rotation.Rotation(direction);
+
         _moveTransform.Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), Time.deltaTime);
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
