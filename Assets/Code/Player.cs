@@ -10,6 +10,7 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _bullet;
     [SerializeField] private Transform _barrel;
     [SerializeField] private float _force;
+
     private Camera _camera;
     private Rigidbody2D _player;
     private Ship _ship;
@@ -47,6 +48,7 @@ internal sealed class Player : MonoBehaviour
         {
             var temAmmunition = Instantiate(_bullet, _barrel.position, _barrel.rotation);
             temAmmunition.AddForce(_barrel.up * _force * Time.deltaTime);
+             
         }
 
     }
