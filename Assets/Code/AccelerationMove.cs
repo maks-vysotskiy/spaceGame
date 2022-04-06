@@ -2,7 +2,8 @@
 internal sealed class AccelerationMove : MoveTransform
 {
     private readonly float _acceleration;
-    public AccelerationMove(Transform transform, float speed, float acceleration): base(transform, speed)
+    public AccelerationMove(Rigidbody2D rb, float speed,  Transform transform, float acceleration)
+        : base(rb, speed, transform)
     {
         _acceleration = acceleration;
     }

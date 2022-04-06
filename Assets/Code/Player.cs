@@ -11,12 +11,14 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private Transform _barrel;
     [SerializeField] private float _force;
     private Camera _camera;
+    private Rigidbody2D _player;
     private Ship _ship;
 
     private void Start()
     {
         _camera = Camera.main;
-        var moveTransform = new AccelerationMove(transform, _speed, _acceleration);
+        _player = GetComponent<Rigidbody2D>();
+        var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         _ship = new Ship(moveTransform, rotation);
     }
