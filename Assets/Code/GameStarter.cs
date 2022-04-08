@@ -9,6 +9,8 @@ internal sealed class GameStarter : MonoBehaviour
 
         IEnemyFactory factory = new AsteroidFactory();
         factory.Create(new Health(100.0f, 100.0f));
+
+        //var platform = new PlatformFactory().CreatePlatform(Application.platform);
     }
 }
 
