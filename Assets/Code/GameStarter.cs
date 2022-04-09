@@ -5,11 +5,7 @@ internal sealed class GameStarter : MonoBehaviour
 
     private void Start()
     {
-        EnemyPool enemyPool = new EnemyPool(3);
-
-        var enemy = enemyPool.GetEnemy("Asteroid");
-        enemy.transform.position = Vector3.one;
-        enemy.gameObject.SetActive(true);
+        Enemy.CreateSpiderEnemy(new Health(100.0f, 100.0f));
 
 
         //Enemy.CreateAsteroidEnemy(new Health(100.0f, 100.0f));

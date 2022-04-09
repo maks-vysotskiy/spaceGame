@@ -55,6 +55,13 @@ internal abstract class Enemy : MonoBehaviour
         enemy.Health = hp;
         return enemy;
     }
+
+    public static Spider CreateSpiderEnemy(Health hp)
+    {
+        var enemy = Instantiate(Resources.Load<Spider>("Spider"));
+        enemy.Health = hp;
+        return enemy;
+    }
     public void DependencyInjectionHealth(Health hp)
     {
         Health = hp;
