@@ -8,12 +8,16 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private float _acceleration;
     [SerializeField] private float _hp;
     [SerializeField] private Rigidbody2D _bullet;
-    [SerializeField] private Transform _barrel;
+    [SerializeField] private Transform _gunPlace;
     [SerializeField] private float _force;
+
 
     private Camera _camera;
     private Rigidbody2D _player;
     private Ship _ship;
+
+    private BulletPool _bulletPool;
+    private int _bulletCounts = 50;
 
     private void Start()
     {
@@ -22,6 +26,8 @@ internal sealed class Player : MonoBehaviour
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         _ship = new Ship(moveTransform, rotation);
+
+        _bulletPool = new BulletPool(_bulletCounts, "Laser", _gunPlace);
     }
 
 
@@ -46,9 +52,10 @@ internal sealed class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            var temAmmunition = Instantiate(_bullet, _barrel.position, _barrel.rotation);
-            temAmmunition.AddForce(_barrel.up * _force * Time.deltaTime);
-             
+            var temAmmunition =_bulletPool.GetBullet();
+            temAmmunition.GetPool(_bulletPool);
+            temAmmunition.gameObject.GetComponent<Rigidbody2D>().AddForce(_gunPlace.up * _force * Time.deltaTime);
+            
         }
 
     }
