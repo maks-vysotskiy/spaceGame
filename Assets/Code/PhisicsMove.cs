@@ -1,25 +1,23 @@
-﻿using System;
-using UnityEngine;
-internal class MoveTransform: IMove
+﻿using UnityEngine;
+internal class PhisicsMove : IMove
 {
-    private readonly Rigidbody2D _rb;
+    private readonly Rigidbody2D _rigidBody;
     private Vector3 _move;
     private readonly Transform _transform;
+
     public float Speed { get; protected set; }
 
-    public MoveTransform(Rigidbody2D rb, float speed, Transform transform)
+    public PhisicsMove(Rigidbody2D rigidBody, float speed, Transform transform)
     {
-        _rb = rb;
+        _rigidBody = rigidBody;
         Speed = speed;
         _transform = transform;
     }
-        
 
     public void Move(float horizontal, float vertical, float deltaTime)
     {
         var direction = new Vector3(horizontal, vertical, 0.0f);
-        _rb.AddForce(_transform.TransformDirection(direction));
-                
+        _rigidBody.AddForce(_transform.TransformDirection(direction));
     }
 }
 

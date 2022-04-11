@@ -5,6 +5,10 @@ internal abstract class Enemy : MonoBehaviour
     public static IEnemyFactory Factory;
     private Transform _rootPool;
     private Health _health;
+
+    private const string _resourcesAsteroid = "Asteroid";
+    private const string _resourcesSpider = "Spider";
+
     public Health Health
     {
         get
@@ -17,6 +21,7 @@ internal abstract class Enemy : MonoBehaviour
         }
         protected set => _health = value;
     }
+
     public Transform RootPool
     {
         get
@@ -49,19 +54,21 @@ internal abstract class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public static Asteroid CreateAsteroidEnemy(Health hp)
     {
-        var enemy = Instantiate(Resources.Load<Asteroid>("Asteroid"));
+        var enemy = Instantiate(Resources.Load<Asteroid>(_resourcesAsteroid));
         enemy.Health = hp;
         return enemy;
     }
 
     public static Spider CreateSpiderEnemy(Health hp)
     {
-        var enemy = Instantiate(Resources.Load<Spider>("Spider"));
+        var enemy = Instantiate(Resources.Load<Spider>(_resourcesSpider));
         enemy.Health = hp;
         return enemy;
     }
+
     public void DependencyInjectionHealth(Health hp)
     {
         Health = hp;

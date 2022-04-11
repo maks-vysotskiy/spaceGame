@@ -37,6 +37,7 @@ internal sealed class EnemyPool
     {
         return _enemyPool.ContainsKey(type) ? _enemyPool[type] : _enemyPool[type] = new HashSet<Enemy>();
     }
+
     private Enemy GetAsteroid(HashSet<Enemy>enemies)
     {
         var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);

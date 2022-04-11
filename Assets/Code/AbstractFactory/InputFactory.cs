@@ -4,7 +4,7 @@ internal sealed class InputFactory
 {
     public IInput CreateInput(RuntimePlatform platform)
     {
-        switch(platform)
+        switch (platform)
         {
             case RuntimePlatform.WindowsPlayer:
             case RuntimePlatform.WindowsEditor:

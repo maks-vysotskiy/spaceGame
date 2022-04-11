@@ -4,7 +4,7 @@ internal sealed class WindowFactory
 {
     public IWindow CreateWindow(RuntimePlatform platform)
     {
-        switch(platform)
+        switch (platform)
         {
             case RuntimePlatform.WindowsPlayer:
             case RuntimePlatform.WindowsEditor:

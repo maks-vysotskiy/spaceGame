@@ -11,7 +11,6 @@ internal sealed class PlatformFactory
         _windowFactory = new WindowFactory();
     }
     
-
     public Platform CreatePlatform(RuntimePlatform platform)
     {
         return new Platform(_windowFactory.CreateWindow(platform), _inputFactory.CreateInput(platform));

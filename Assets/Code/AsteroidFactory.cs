@@ -2,9 +2,10 @@
 using UnityEngine;
 internal sealed class AsteroidFactory : IEnemyFactory
 {
+    private const string _resourcesAsteroid = "Asteroid";
     public Enemy Create(Health hp)
     {
-        var enemy = UnityEngine.Object.Instantiate(Resources.Load<Asteroid>("Asteroid"));
+        var enemy = UnityEngine.Object.Instantiate(Resources.Load<Asteroid>(_resourcesAsteroid));
         enemy.DependencyInjectionHealth(hp);
         return enemy;
     }

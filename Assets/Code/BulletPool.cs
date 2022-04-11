@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -10,7 +9,6 @@ internal sealed class BulletPool
     private readonly int _capasityPool;
     private readonly Transform _gunPosition;
     private Transform _rootPool;
-
 
     public BulletPool(int capasity, string typeBullet, Transform gunPosition)
     {
@@ -23,16 +21,11 @@ internal sealed class BulletPool
             _rootPool = new GameObject(NameManager.POOL_PLAYER_BULLET).transform;
         }
         CreatePool(_capasityPool, typeBullet);
-        
     }
 
-    
-
-    public Bullet GetBullet()
+    public Bullet TakeBullet()
     {
         var bullet = _bulletPool.FirstOrDefault(a => !a.gameObject.activeSelf);
-
-
         return ActiveBullet(bullet);
     }
 
@@ -54,6 +47,7 @@ internal sealed class BulletPool
         bullet.gameObject.transform.gameObject.SetActive(false);
         bullet.gameObject.transform.SetParent(_rootPool);
     }
+
     private Bullet ActiveBullet(Bullet bullet)
     {
         bullet.gameObject.transform.localPosition = _gunPosition.position;
