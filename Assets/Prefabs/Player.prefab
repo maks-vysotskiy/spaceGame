@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5538624644512687370}
   - component: {fileID: 2042635816}
   - component: {fileID: 2042635813}
+  - component: {fileID: 4728578927718633772}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -154,3 +155,19 @@ MonoBehaviour:
   _bullet: {fileID: -6952744142128841609, guid: d939d25548322a946814f598363e4872, type: 3}
   _gunPlace: {fileID: 4387157162512903634}
   _force: 100
+--- !u!58 &4728578927718633772
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8095530989393596362}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.67448676}
+  serializedVersion: 2
+  m_Radius: 4.3255134

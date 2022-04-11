@@ -11,6 +11,15 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private Transform _gunPlace;
     [SerializeField] private float _force;
 
+    public float HP
+    {
+        get
+        {
+            return _hp = _ship.GetHp();
+        }
+        private set { }
+    }
+
     private Camera _camera;
     private Rigidbody2D _player;
     private Ship _ship;
@@ -27,7 +36,7 @@ internal sealed class Player : MonoBehaviour
 
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
-        var takeDamage = new TakeDamageShip(_hp);
+        var takeDamage = new TakeDamageShip(this, _hp);
         var fire = new FireShip(_bulletPool, _gunPlace, _force);
 
         _ship = new Ship(moveTransform, rotation, takeDamage, fire);
@@ -47,7 +56,7 @@ internal sealed class Player : MonoBehaviour
         {
             _ship.AddAcceleration();
         }
-
+        
         if (Input.GetAxis(AxisManager.HORIZONTAL) == 0 && Input.GetAxis(AxisManager.VERTICAL) == 0)
         {
             _ship.Braking();
@@ -59,9 +68,10 @@ internal sealed class Player : MonoBehaviour
         }
 
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         _ship.TakeDamage(collision.gameObject);
     }
+
+
 }

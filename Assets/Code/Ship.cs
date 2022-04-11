@@ -17,6 +17,11 @@ internal sealed class Ship : IMove, IRotation
         _fireShip = fireShip;
     }
 
+    public float GetHp()
+    {
+        return _takeDamage.GetHp();
+    }
+
     public void Move(float horizontal, float vertical, float deltatime)
     {
         _move.Move(horizontal, vertical, deltatime);

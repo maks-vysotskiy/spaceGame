@@ -3,21 +3,36 @@ using Object = UnityEngine.GameObject;
 internal class TakeDamageShip : ITakeDamageShip
 {
     private float _hp;
+    private Player _player;
 
-    public TakeDamageShip(float hp)
+    public TakeDamageShip(Player player, float hp)
     {
+        _player = player;
         _hp = hp;
     }
+
+    public float GetHp()
+    {
+        return _hp;
+    }
+
     public void TakeDamage(Object damageObject)
     {
-        if(_hp<=0)
+        if (damageObject.tag == "Enemy")
         {
-            Object.Destroy(damageObject);
-        }
-        else
-        {
-            _hp--;
+            if (_hp <= 1)
+            {
+                Object.Destroy(damageObject);
+                Object.Destroy(_player.gameObject);
+            }
+            else
+            {
+                Object.Destroy(damageObject);
+                _hp--;
+            }
         }
     }
+
+
 }
 
