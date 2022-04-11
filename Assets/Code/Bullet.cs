@@ -21,8 +21,7 @@ internal abstract class Bullet : MonoBehaviour
     {
         if (collision.tag == "Border")
         {
-            Debug.Log("Border!");
-            _bulletPool.ReturnToPool(this);
+           _bulletPool.ReturnToPool(this);
         }
     }
 

@@ -5,14 +5,16 @@ internal sealed class Ship : IMove, IRotation
 {
     private readonly IMove _move;
     private readonly IRotation _rotation;
-    private readonly ITakeDamage _takeDamage;
+    private readonly ITakeDamageShip _takeDamage;
+    private readonly IFireShip _fireShip;
     public float Speed => _move.Speed;
 
-    public Ship(IMove move, IRotation rotation, ITakeDamage takeDamage)
+    public Ship(IMove move, IRotation rotation, ITakeDamageShip takeDamage, IFireShip fireShip)
     {
         _move = move;
         _rotation = rotation;
         _takeDamage = takeDamage;
+        _fireShip = fireShip;
     }
 
     public void Move(float horizontal, float vertical, float deltatime)
@@ -44,6 +46,11 @@ internal sealed class Ship : IMove, IRotation
     public void TakeDamage(Object damageObject)
     {
         _takeDamage.TakeDamage(damageObject);
+    }
+
+    public void Fire(bool isFire)
+    {
+        _fireShip.Fire(isFire);
     }
 }
 

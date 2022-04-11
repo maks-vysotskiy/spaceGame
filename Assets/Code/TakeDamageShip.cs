@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.GameObject;
-internal class TakeDamageShip : ITakeDamage
+internal class TakeDamageShip : ITakeDamageShip
 {
     private float _hp;
 

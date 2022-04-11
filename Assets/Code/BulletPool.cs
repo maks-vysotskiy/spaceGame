@@ -26,6 +26,7 @@ internal sealed class BulletPool
     public Bullet TakeBullet()
     {
         var bullet = _bulletPool.FirstOrDefault(a => !a.gameObject.activeSelf);
+        bullet.GetPool(this);
         return ActiveBullet(bullet);
     }
 

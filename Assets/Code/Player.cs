@@ -23,20 +23,25 @@ internal sealed class Player : MonoBehaviour
         _camera = Camera.main;
         _player = GetComponent<Rigidbody2D>();
 
+        _bulletPool = new BulletPool(_bulletCounts, "Laser", _gunPlace);
+
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         var takeDamage = new TakeDamageShip(_hp);
+        var fire = new FireShip(_bulletPool, _gunPlace, _force);
 
-        _ship = new Ship(moveTransform, rotation, takeDamage);
-        _bulletPool = new BulletPool(_bulletCounts, "Laser", _gunPlace);
+        _ship = new Ship(moveTransform, rotation, takeDamage, fire);
+        
     }
 
 
     private void Update()
     {
         var direction = Input.mousePosition - _camera.WorldToScreenPoint(transform.position);
+
         _ship.Rotation(direction);
         _ship.Move(Input.GetAxis(AxisManager.HORIZONTAL), Input.GetAxis(AxisManager.VERTICAL), Time.deltaTime);
+        _ship.Fire(Input.GetButtonDown(AxisManager.FIRE1));
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -47,13 +52,7 @@ internal sealed class Player : MonoBehaviour
         {
             _ship.RemoveAcceleration();
         }
-
-        if (Input.GetButtonDown(AxisManager.FIRE1))
-        {
-            var temAmmunition = _bulletPool.TakeBullet();
-            temAmmunition.GetPool(_bulletPool);
-            temAmmunition.gameObject.GetComponent<Rigidbody2D>().AddForce(_gunPlace.up * (_force * Time.deltaTime));
-        }
+               
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
