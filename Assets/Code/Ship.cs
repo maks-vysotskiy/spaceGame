@@ -22,6 +22,11 @@ internal sealed class Ship : IMove, IRotation
         _move.Move(horizontal, vertical, deltatime);
     }
 
+    public void Braking()
+    {
+        _move.Braking();
+    }
+
     public void Rotation(Vector3 direction)
     {
         _rotation.Rotation(direction);

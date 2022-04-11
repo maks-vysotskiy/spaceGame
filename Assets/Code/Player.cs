@@ -31,7 +31,7 @@ internal sealed class Player : MonoBehaviour
         var fire = new FireShip(_bulletPool, _gunPlace, _force);
 
         _ship = new Ship(moveTransform, rotation, takeDamage, fire);
-        
+
     }
 
 
@@ -48,11 +48,16 @@ internal sealed class Player : MonoBehaviour
             _ship.AddAcceleration();
         }
 
+        if (Input.GetAxis(AxisManager.HORIZONTAL) == 0 && Input.GetAxis(AxisManager.VERTICAL) == 0)
+        {
+            _ship.Braking();
+        }
+
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _ship.RemoveAcceleration();
         }
-               
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
