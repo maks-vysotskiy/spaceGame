@@ -3,7 +3,7 @@ using UnityEngine;
 internal sealed class SpiderFactory : IEnemyFactory
 {
     private const string _resourcesSpider = "Spider";
-    public Enemy Create(Health hp)
+    public Enemy Create(float hp)
     {
         var enemy = UnityEngine.Object.Instantiate(Resources.Load<Spider>(_resourcesSpider));
         enemy.DependencyInjectionHealth(hp);

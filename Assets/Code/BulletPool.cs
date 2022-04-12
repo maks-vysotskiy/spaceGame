@@ -43,16 +43,18 @@ internal sealed class BulletPool
 
     public void ReturnToPool(Bullet bullet)
     {
-        bullet.gameObject.transform.localPosition = Vector3.zero;
-        bullet.gameObject.transform.localRotation = Quaternion.identity;
-        bullet.gameObject.transform.gameObject.SetActive(false);
-        bullet.gameObject.transform.SetParent(_rootPool);
+        var transformObj = bullet.gameObject.transform;
+        transformObj.localPosition = Vector3.zero;
+        transformObj.localRotation = Quaternion.identity;
+        transformObj.gameObject.SetActive(false);
+        transformObj.SetParent(_rootPool);
     }
 
     private Bullet ActiveBullet(Bullet bullet)
     {
-        bullet.gameObject.transform.localPosition = _gunPosition.position;
-        bullet.gameObject.transform.localRotation = _gunPosition.rotation;
+        var transformObj = bullet.gameObject.transform;
+        transformObj.localPosition = _gunPosition.position;
+        transformObj.localRotation = _gunPosition.rotation;
         bullet.gameObject.SetActive(true);
         bullet.transform.SetParent(null);
 

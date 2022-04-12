@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 internal sealed class GameStarter : MonoBehaviour
 {
+    [SerializeField] private Transform[] _spawnPlaces;
+    private EnemySpawner _enemySpawner;
     private void Start()
     {
-        Enemy.CreateSpiderEnemy(new Health(100.0f, 100.0f));
+        _enemySpawner = new EnemySpawner(new EnemyPool(20), _spawnPlaces);
+        
+    }
 
-        IEnemyFactory Asteroidfactory = new AsteroidFactory();
-        IEnemyFactory Spiderfactory = new SpiderFactory();
-        Asteroidfactory.Create(new Health(100.0f, 100.0f));
-        Spiderfactory.Create(new Health(100.0f, 100.0f));
-         
-        //var platform = new PlatformFactory().CreatePlatform(Application.platform);
-
+    private void Update()
+    {
+        _enemySpawner.SpawnEnemy("Asteroid");
+        
     }
 }
 

@@ -47,7 +47,8 @@ internal sealed class EnemyPool
             for(var i=0; i<_capasityPool; i++)
             {
                 var instantiate = Object.Instantiate(asteroid);
-                ReturnToPool(instantiate.transform);
+                instantiate.GetPool(this);
+                ReturnToPool(instantiate);
                 enemies.Add(instantiate);
             }
             GetAsteroid(enemies);
@@ -56,12 +57,27 @@ internal sealed class EnemyPool
         return enemy;
     }
 
-    private void ReturnToPool(Transform transform)
+    public void ReturnToPool(Enemy enemy)
     {
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        transform.gameObject.SetActive(false);
-        transform.SetParent(_rootPool);
+        var transformObj = enemy.gameObject.transform;
+        transformObj.localPosition = Vector3.zero;
+        transformObj.localRotation = Quaternion.identity;
+        transformObj.gameObject.SetActive(false);
+        transformObj.SetParent(_rootPool);
+        if (!_rootPool)
+        {
+            Object.Destroy(enemy.gameObject);
+        }
+    }
+
+    public void ActiveEnemy(Enemy enemy)
+    {
+        var transformObj = enemy.gameObject.transform;
+        transformObj.localPosition = _rootPool.transform.position;
+        transformObj.localRotation = _rootPool.transform.rotation;
+        enemy.DependencyInjectionHealth(3);
+        enemy.gameObject.SetActive(true);
+        enemy.transform.SetParent(null);
     }
     public void RemovePool()
     {

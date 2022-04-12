@@ -1,77 +1,86 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 internal abstract class Enemy : MonoBehaviour
 {
     public static IEnemyFactory Factory;
-    private Transform _rootPool;
-    private Health _health;
+
+    private float _health = 3;
+    private EnemyPool _enemyPool = null;
+    private EnemyMove _move;
 
     private const string _resourcesAsteroid = "Asteroid";
     private const string _resourcesSpider = "Spider";
 
-    public Health Health
+    private float _minSpeed = 1f;
+    private float _maxSpeed = 2.5f;
+
+    public float Speed
     {
         get
         {
-            if (_health.Current < 0.0f)
-            {
-                ReturnToPool();
-            }
-            return _health;
+            return Random.Range(_minSpeed, _maxSpeed);
         }
-        protected set => _health = value;
+        private set { }
     }
 
-    public Transform RootPool
+    private void Start()
     {
-        get
-        {
-            if(_rootPool==null)
-            {
-                var find = GameObject.Find(NameManager.POOL_AMMUNITION);
-                _rootPool = find == null ? null : find.transform;
-            }
-            return _rootPool;
-        }
+        _move = new EnemyMove(Speed);
     }
 
-    public void ActiveEnemy(Vector3 position, Quaternion rotation)
+    private void Update()
     {
-        transform.localPosition = position;
-        transform.localRotation = rotation;
-        gameObject.SetActive(true);
-        transform.SetParent(null);
+        Move(transform);
     }
 
-    protected void ReturnToPool()
-    {
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        gameObject.SetActive(false);
-        transform.SetParent(RootPool);
-        if(!RootPool)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public static Asteroid CreateAsteroidEnemy(Health hp)
+    public static Asteroid CreateAsteroidEnemy(float hp)
     {
         var enemy = Instantiate(Resources.Load<Asteroid>(_resourcesAsteroid));
-        enemy.Health = hp;
+        enemy.DependencyInjectionHealth(hp);
         return enemy;
     }
 
-    public static Spider CreateSpiderEnemy(Health hp)
+    public static Spider CreateSpiderEnemy(float hp)
     {
         var enemy = Instantiate(Resources.Load<Spider>(_resourcesSpider));
-        enemy.Health = hp;
+        enemy.DependencyInjectionHealth(hp);
         return enemy;
     }
 
-    public void DependencyInjectionHealth(Health hp)
+    public void DependencyInjectionHealth(float hp)
     {
-        Health = hp;
+        _health = hp;
     }
+
+    public void GetPool(EnemyPool enemyPool)
+    {
+        _enemyPool = enemyPool;
+    }
+
+    public void Move(Transform transform)
+    {
+        _move.Move(transform);
+        Debug.Log(_health);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Border")
+        {
+             _enemyPool.ReturnToPool(this);
+        }
+        else if (collision.tag == "Bullet")
+        {
+            if (_health <= 1)
+            {
+                _enemyPool.ReturnToPool(this);
+            }
+            else
+            {
+                _health--;
+            }
+        }
+    }
+
+
 }
 

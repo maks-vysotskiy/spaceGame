@@ -1,5 +1,5 @@
 ﻿internal interface IEnemyFactory
 {
-    Enemy Create(Health hp);
+    Enemy Create(float hp);
 }
 
