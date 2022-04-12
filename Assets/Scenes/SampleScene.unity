@@ -362,11 +362,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &1089328688 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4387157162512903634, guid: 76e73e482f9397a4c924f5e81d697b98, type: 3}
-  m_PrefabInstance: {fileID: 674414135268587767}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1130463109
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,50 +419,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20.16254, y: 1}
   m_EdgeRadius: 0
---- !u!1 &2042635812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8095530989393596362, guid: 76e73e482f9397a4c924f5e81d697b98, type: 3}
-  m_PrefabInstance: {fileID: 674414135268587767}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2042635813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042635812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b036b0e7b907fc4791c63501707540d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  _acceleration: 2
-  _hp: 3
-  _bullet: {fileID: -6952744142128841609, guid: d939d25548322a946814f598363e4872, type: 3}
-  _gunPlace: {fileID: 1089328688}
-  _force: 100
---- !u!50 &2042635816
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042635812}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &2088955751
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,10 +500,6 @@ PrefabInstance:
     - target: {fileID: 2621039154811169945, guid: 76e73e482f9397a4c924f5e81d697b98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3065553016979760598, guid: 76e73e482f9397a4c924f5e81d697b98, type: 3}
-      propertyPath: m_Name
-      value: GunPosition
       objectReference: {fileID: 0}
     - target: {fileID: 8095530989393596362, guid: 76e73e482f9397a4c924f5e81d697b98, type: 3}
       propertyPath: m_Name
