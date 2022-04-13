@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-internal class EnemyMove
+internal class EnemyMove : IMoveEnemy
 {
     private Vector3 _direction;
     private readonly float _speed;
-    
+
 
     public EnemyMove(float speed)
     {
@@ -13,9 +13,8 @@ internal class EnemyMove
     public void Move(Transform transform)
     {
         transform.Translate(Vector3.left * (_speed * Time.deltaTime));
-        Debug.Log("Hello. Move");
     }
-   
+
 
 }
 

@@ -22,12 +22,10 @@ internal class TakeDamageShip : ITakeDamageShip
         {
             if (_hp <= 1)
             {
-                //Object.Destroy(damageObject);
                 Object.Destroy(_player.gameObject);
             }
             else
             {
-                //Object.Destroy(damageObject);
                 _hp--;
             }
         }

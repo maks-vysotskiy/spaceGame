@@ -3,9 +3,20 @@ internal abstract class Enemy : MonoBehaviour
 {
     public static IEnemyFactory Factory;
 
-    private float _health = 3;
+    [SerializeField] private float _health = 3;
     private EnemyPool _enemyPool = null;
-    private EnemyMove _move;
+    private IMoveEnemy _move;
+    private ITakeDamageEnemy _takeDamage;
+
+    public EnemyPool EnemyPool
+    {
+        get
+        {
+            return _enemyPool;
+        }
+        private set { }
+    }
+
 
     private const string _resourcesAsteroid = "Asteroid";
     private const string _resourcesSpider = "Spider";
@@ -25,11 +36,14 @@ internal abstract class Enemy : MonoBehaviour
     private void Start()
     {
         _move = new EnemyMove(Speed);
+        _takeDamage = new TakeDamageEnemy(this, _health);
+
     }
 
     private void Update()
     {
-        Move(transform);
+        _move.Move(transform);
+
     }
 
     public static Asteroid CreateAsteroidEnemy(float hp)
@@ -49,6 +63,7 @@ internal abstract class Enemy : MonoBehaviour
     public void DependencyInjectionHealth(float hp)
     {
         _health = hp;
+        _takeDamage.RefreshHp(hp);
     }
 
     public void GetPool(EnemyPool enemyPool)
@@ -56,29 +71,10 @@ internal abstract class Enemy : MonoBehaviour
         _enemyPool = enemyPool;
     }
 
-    public void Move(Transform transform)
-    {
-        _move.Move(transform);
-        Debug.Log(_health);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Border")
-        {
-             _enemyPool.ReturnToPool(this);
-        }
-        else if (collision.tag == "Bullet")
-        {
-            if (_health <= 1)
-            {
-                _enemyPool.ReturnToPool(this);
-            }
-            else
-            {
-                _health--;
-            }
-        }
+        _takeDamage.TakeDamage(collision.gameObject);
+
     }
 
 

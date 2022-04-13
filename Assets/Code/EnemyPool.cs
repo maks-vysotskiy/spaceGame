@@ -75,7 +75,6 @@ internal sealed class EnemyPool
         var transformObj = enemy.gameObject.transform;
         transformObj.localPosition = _rootPool.transform.position;
         transformObj.localRotation = _rootPool.transform.rotation;
-        enemy.DependencyInjectionHealth(3);
         enemy.gameObject.SetActive(true);
         enemy.transform.SetParent(null);
     }
