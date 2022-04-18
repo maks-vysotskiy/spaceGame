@@ -7,8 +7,8 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _hp;
-    [SerializeField] private Rigidbody2D _bullet;
     [SerializeField] private Transform _gunPlace;
+    [SerializeField] private Transform _gunPlaceLaserRed;
     [SerializeField] private float _force;
 
     public float HP
@@ -37,7 +37,7 @@ internal sealed class Player : MonoBehaviour
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         var takeDamage = new TakeDamageShip(this, _hp);
-        var fire = new FireShip(_bulletPool, _gunPlace, _force);
+        var fire = new FireShip(_bulletPool, _gunPlace, _force, _gunPlaceLaserRed);
 
         _ship = new Ship(moveTransform, rotation, takeDamage, fire);
 
