@@ -6,15 +6,18 @@ internal sealed class Ship : IMove, IRotation
     private readonly IMove _move;
     private readonly IRotation _rotation;
     private readonly ITakeDamageShip _takeDamage;
-    private readonly IFireShip _fireShip;
+    private readonly IFireShip _fireShip1;
+    private readonly IFireShip _fireShip2;
+
     public float Speed => _move.Speed;
 
-    public Ship(IMove move, IRotation rotation, ITakeDamageShip takeDamage, IFireShip fireShip)
+    public Ship(IMove move, IRotation rotation, ITakeDamageShip takeDamage, IFireShip fireShip1, IFireShip fireShip2)
     {
         _move = move;
         _rotation = rotation;
         _takeDamage = takeDamage;
-        _fireShip = fireShip;
+        _fireShip1 = fireShip1;
+        _fireShip2 = fireShip2;
     }
 
     public float GetHp()
@@ -60,7 +63,8 @@ internal sealed class Ship : IMove, IRotation
 
     public void Fire(bool isFire)
     {
-        _fireShip.Fire(isFire);
+        _fireShip1.Fire(isFire);
+        _fireShip2.Fire(isFire);
     }
 }
 

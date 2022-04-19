@@ -37,9 +37,10 @@ internal sealed class Player : MonoBehaviour
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         var takeDamage = new TakeDamageShip(this, _hp);
-        var fire = new FireShip(_bulletPool, _gunPlace, _force, _gunPlaceLaserRed);
+        var fire1 = new FireShip(_bulletPool, _gunPlace, _force, _gunPlaceLaserRed);
+        var fire2 = new FireBlankShip("PIF-PAF, Mother fucker!!!!");
 
-        _ship = new Ship(moveTransform, rotation, takeDamage, fire);
+        _ship = new Ship(moveTransform, rotation, takeDamage, fire1, fire2);
 
     }
 
