@@ -14,7 +14,7 @@ internal abstract class Enemy : MonoBehaviour
         {
             return _enemyPool;
         }
-        private set { }
+        
     }
 
 

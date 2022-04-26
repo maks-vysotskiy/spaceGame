@@ -18,7 +18,7 @@ internal class TakeDamageShip : ITakeDamageShip
 
     public void TakeDamage(Object damageObject)
     {
-        if (damageObject.tag == "Enemy")
+        if (damageObject.CompareTag("Enemy"))
         {
             if (_hp <= 1)
             {

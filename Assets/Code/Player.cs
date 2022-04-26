@@ -17,7 +17,7 @@ internal sealed class Player : MonoBehaviour
         {
             return _hp = _ship.GetHp();
         }
-        private set { }
+        
     }
 
     private Camera _camera;

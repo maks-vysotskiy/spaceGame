@@ -18,12 +18,12 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
 
     public void TakeDamage(Object damageObject)
     {
-        if (damageObject.tag == "Border")
+        if (damageObject.CompareTag("Border"))
         {
             _enemy.EnemyPool.ReturnToPool(_enemy);
             _enemy.DependencyInjectionHealth(3);
         }
-        else if (damageObject.tag == "Bullet")
+        else if (damageObject.CompareTag("Bullet"))
         {
             if (_hp <= 1)
             {
@@ -35,7 +35,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
                 _hp--;
             }
         }
-        else if(damageObject.tag == "Player")
+        else if(damageObject.CompareTag("Player"))
         {
             _enemy.EnemyPool.ReturnToPool(_enemy);
             _enemy.DependencyInjectionHealth(3);

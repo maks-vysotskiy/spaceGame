@@ -6,11 +6,11 @@ internal abstract class Bullet : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Border")
+        if (collision.CompareTag("Border"))
         {
            _bulletPool.ReturnToPool(this);
         }
-        else if(collision.tag=="Enemy")
+        else if(collision.CompareTag("Enemy"))
         {
             _bulletPool.ReturnToPool(this);
 
