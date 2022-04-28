@@ -4,6 +4,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
 {
     private float _hp;
     private Enemy _enemy;
+    private int _bonusPoint = 501;
 
     public TakeDamageEnemy(Enemy enemy, float hp)
     {
@@ -16,7 +17,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
         _hp = hp;
     }
 
-    public void TakeDamage(Object damageObject)
+   public void TakeDamage(Object damageObject)
     {
         if (damageObject.CompareTag("Border"))
         {
@@ -29,6 +30,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
             {
                 _enemy.EnemyPool.ReturnToPool(_enemy);
                 _enemy.DependencyInjectionHealth(3);
+                _enemy._pointManager.AddPoint(_bonusPoint);
             }
             else
             {

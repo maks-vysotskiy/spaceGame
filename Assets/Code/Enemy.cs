@@ -8,6 +8,8 @@ internal abstract class Enemy : MonoBehaviour
     private IMoveEnemy _move;
     private ITakeDamageEnemy _takeDamage;
 
+    public PointManager _pointManager;
+
     public EnemyPool EnemyPool
     {
         get
@@ -37,7 +39,8 @@ internal abstract class Enemy : MonoBehaviour
     {
         _move = new EnemyMove(Speed);
         _takeDamage = new TakeDamageEnemy(this, _health);
-
+        _pointManager = FindObjectOfType<PointManager>();
+       
     }
 
     private void Update()
@@ -70,6 +73,7 @@ internal abstract class Enemy : MonoBehaviour
     {
         _enemyPool = enemyPool;
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
