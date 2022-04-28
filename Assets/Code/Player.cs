@@ -11,18 +11,39 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private Transform _gunPlaceLaserRed;
     [SerializeField] private float _force;
 
+    [SerializeField] private float _upgradeSpeed;
+    [SerializeField] private float _upgradeHealth;
+
+    public float Speed
+    {
+        get
+        {
+            return _speed;
+        }
+        set
+        {
+            _speed = value;
+        }
+    }
+
+
     public float HP
     {
         get
         {
             return _hp = _ship.GetHp();
         }
-        
+        set
+        {
+            _ship.AddHp(value);
+        }
+
     }
 
     private Camera _camera;
     private Rigidbody2D _player;
     private Ship _ship;
+    private PlayerModifier _playerModifier;
 
     private BulletPool _bulletPool;
     private int _bulletCounts = 50;
@@ -33,7 +54,7 @@ internal sealed class Player : MonoBehaviour
         _player = GetComponent<Rigidbody2D>();
 
         _bulletPool = new BulletPool(_bulletCounts, "Laser", _gunPlace);
-
+                
         var moveTransform = new AccelerationMove(_player, _speed, transform, _acceleration);
         var rotation = new RotationShip(transform);
         var takeDamage = new TakeDamageShip(this, _hp);
@@ -41,6 +62,10 @@ internal sealed class Player : MonoBehaviour
         var fire2 = new FireBlankShip("PIF-PAF, Mother fucker!!!!");
 
         _ship = new Ship(moveTransform, rotation, takeDamage, fire1, fire2);
+
+        _playerModifier = new PlayerModifier(this);
+        _playerModifier.Add(new AddHpPlayerModifier(this, _upgradeHealth));
+        _playerModifier.Add(new AddSpeedPlayerModifier(this, _upgradeSpeed));
 
     }
 
@@ -57,7 +82,7 @@ internal sealed class Player : MonoBehaviour
         {
             _ship.AddAcceleration();
         }
-        
+
         if (Input.GetAxis(AxisManager.HORIZONTAL) == 0 && Input.GetAxis(AxisManager.VERTICAL) == 0)
         {
             _ship.Braking();
@@ -66,6 +91,12 @@ internal sealed class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _ship.RemoveAcceleration();
+        }
+
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            _playerModifier.Handle();
+            
         }
 
     }

@@ -16,6 +16,12 @@ internal class TakeDamageShip : ITakeDamageShip
         return _hp;
     }
 
+    public void AddHp(float hp)
+    {
+        Debug.Log($"TakeDamage - AddHP({hp} _hp={_hp})");
+        _hp += hp;
+    }
+
     public void TakeDamage(Object damageObject)
     {
         if (damageObject.CompareTag("Enemy"))

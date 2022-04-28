@@ -25,6 +25,12 @@ internal sealed class Ship : IMove, IRotation
         return _takeDamage.GetHp();
     }
 
+    public void AddHp(float hp)
+    {
+        Debug.Log($"Ship - AddHP({hp})");
+        _takeDamage.AddHp(hp);
+    }
+
     public void Move(float horizontal, float vertical, float deltatime)
     {
         _move.Move(horizontal, vertical, deltatime);
@@ -42,7 +48,7 @@ internal sealed class Ship : IMove, IRotation
 
     public void AddAcceleration()
     {
-        if(_move is AccelerationMove accelerationMove)
+        if (_move is AccelerationMove accelerationMove)
         {
             accelerationMove.AddAcceleration();
         }

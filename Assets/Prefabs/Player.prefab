@@ -135,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ee5211ab54d66ae4987bd2fdf87b3c2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -183,10 +183,11 @@ MonoBehaviour:
   _speed: 2
   _acceleration: 2
   _hp: 3
-  _bullet: {fileID: -6952744142128841609, guid: d939d25548322a946814f598363e4872, type: 3}
   _gunPlace: {fileID: 4387157162512903634}
   _gunPlaceLaserRed: {fileID: 9139508606547570160}
   _force: 100
+  _upgradeSpeed: 2
+  _upgradeHealth: 1
 --- !u!58 &4728578927718633772
 CircleCollider2D:
   m_ObjectHideFlags: 0
