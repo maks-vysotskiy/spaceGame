@@ -19,11 +19,13 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
 
    public void TakeDamage(Object damageObject)
     {
-        if (damageObject.CompareTag("Border"))
+        //if (damageObject.CompareTag("Border"))
+        if(damageObject.TryGetComponent(out Border component))
         {
             _enemy.EnemyPool.ReturnToPool(_enemy);
             _enemy.DependencyInjectionHealth(3);
         }
+
         else if (damageObject.CompareTag("Bullet"))
         {
             if (_hp <= 1)

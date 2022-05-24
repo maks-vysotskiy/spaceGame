@@ -1330,6 +1330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587369619}
   - component: {fileID: 1587369620}
+  - component: {fileID: 1587369621}
   m_Layer: 0
   m_Name: LeftBorder
   m_TagString: Border
@@ -1377,6 +1378,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.013004, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1587369621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6488a459e4570f140b22eb3a29f64ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1909185584
 GameObject:
   m_ObjectHideFlags: 0

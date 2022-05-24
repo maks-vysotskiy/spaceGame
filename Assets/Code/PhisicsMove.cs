@@ -18,6 +18,7 @@ internal class PhisicsMove : IMove
     {
         var direction = new Vector3(horizontal, vertical, 0.0f);
         _rigidBody.AddForce(_transform.TransformDirection(direction));
+       
     }
     public void Braking()
     {
