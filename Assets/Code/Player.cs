@@ -14,6 +14,8 @@ internal sealed class Player : MonoBehaviour
     [SerializeField] private float _upgradeSpeed;
     [SerializeField] private float _upgradeHealth;
 
+
+
     public float Speed
     {
         get
@@ -44,6 +46,7 @@ internal sealed class Player : MonoBehaviour
     private Rigidbody2D _player;
     private Ship _ship;
     private PlayerModifier _playerModifier;
+    private MoveStateShip _moveStateShip;
 
     private BulletPool _bulletPool;
     private int _bulletCounts = 50;
@@ -62,6 +65,7 @@ internal sealed class Player : MonoBehaviour
         var fire2 = new FireBlankShip("PIF-PAF, Mother fucker!!!!");
 
         _ship = new Ship(moveTransform, rotation, takeDamage, fire1, fire2);
+        _moveStateShip = new MoveStateShip(transform, 5.0f);
 
         _playerModifier = new PlayerModifier(this);
         _playerModifier.Add(new AddHpPlayerModifier(this, _upgradeHealth));
@@ -78,9 +82,10 @@ internal sealed class Player : MonoBehaviour
         _ship.Move(Input.GetAxis(AxisManager.HORIZONTAL), Input.GetAxis(AxisManager.VERTICAL), Time.deltaTime);
         _ship.Fire(Input.GetButtonDown(AxisManager.FIRE1));
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             _ship.AddAcceleration();
+            Debug.Log("Acceleration");
         }
 
         if (Input.GetAxis(AxisManager.HORIZONTAL) == 0 && Input.GetAxis(AxisManager.VERTICAL) == 0)
@@ -98,6 +103,32 @@ internal sealed class Player : MonoBehaviour
             _playerModifier.Handle();
             
         }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            _moveStateShip.SetMoveForwardState();
+            _moveStateShip.Execute();
+
+        }
+
+        if (Input.GetKey(KeyCode.G))
+        {
+            _moveStateShip.SetMoveBackState();
+            _moveStateShip.Execute();
+        }
+
+        if (Input.GetKey(KeyCode.H))
+        {
+            _moveStateShip.SetMoveRightState();
+            _moveStateShip.Execute();
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            _moveStateShip.SetMoveLeftState();
+            _moveStateShip.Execute();
+        }
+
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
