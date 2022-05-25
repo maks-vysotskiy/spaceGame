@@ -1,15 +1,28 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Object = UnityEngine.GameObject;
-internal class TakeDamageEnemy : ITakeDamageEnemy
+internal class TakeDamageEnemy : ITakeDamageEnemy, IPointOnHit
 {
     private float _hp;
     private Enemy _enemy;
     private int _bonusPoint = 501;
+    private PointToScreenObserver _pointObserver;
 
-    public TakeDamageEnemy(Enemy enemy, float hp)
+    public event Action OnHitEnemy = delegate { };
+
+    public TakeDamageEnemy(Enemy enemy, float hp, PointToScreenObserver pointObserver)
     {
         _enemy = enemy;
         _hp = hp;
+        _pointObserver = pointObserver;
+        _pointObserver.Add(this);
+    }
+
+    
+
+    public void HitToEnemy()
+    {
+        OnHitEnemy.Invoke();
     }
 
     public void RefreshHp(float hp)
@@ -31,6 +44,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
             if (_hp <= 1)
             {
                 _enemy.EnemyPool.ReturnToPool(_enemy);
+                HitToEnemy();
                 _enemy.DependencyInjectionHealth(3);
                 _enemy._pointManager.AddPoint(_bonusPoint);
             }
@@ -42,6 +56,7 @@ internal class TakeDamageEnemy : ITakeDamageEnemy
         else if(damageObject.CompareTag("Player"))
         {
             _enemy.EnemyPool.ReturnToPool(_enemy);
+            HitToEnemy();
             _enemy.DependencyInjectionHealth(3);
         }
     }
